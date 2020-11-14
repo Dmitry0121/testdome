@@ -1,0 +1,29 @@
+-- Suggested testing environment:
+-- http://sqlite.online/
+
+-- Example case create statement:
+CREATE TABLE customers (
+  id INTEGER NOT NULL PRIMARY KEY,
+  name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE transactions (
+  id INTEGER NOT NULL PRIMARY KEY,
+  customerId INTEGER REFERENCES customers(id),
+  amount DECIMAL(15,2) NOT NULL
+);
+
+INSERT INTO customers(id, name) VALUES(1, 'Steve');
+INSERT INTO customers(id, name) VALUES(2, 'Jeff');
+INSERT INTO transactions(id, customerId, amount) VALUES(1, 1, 100);
+
+-- Expected output (in any order):
+-- name     transactions
+-- -------------------------------
+-- Steve    1
+-- Jeff     0
+
+-- Explanation:
+-- In this example.
+-- There are two customers, Steve and Jeff.
+-- Steve has made one transaction. Jeff has made zero transactions.

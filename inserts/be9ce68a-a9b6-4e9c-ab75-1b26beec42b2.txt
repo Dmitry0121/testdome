@@ -1,0 +1,16 @@
+-- Suggested testing environment: 
+-- http://sqlite.online/
+
+-- Example case create statement:
+CREATE TABLE cities (
+  id INTEGER NOT NULL PRIMARY KEY,
+  name VARCHAR(30) NOT NULL
+);
+INSERT INTO cities(id, name) values(1, 'Los Angeles');
+INSERT INTO cities(id, name) values(2, 'Washington');
+INSERT INTO cities(id, name) values(3, 'New York');
+
+-- Expected output:
+-- Washington
+-- New York
+-- Los Angeles

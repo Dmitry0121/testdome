@@ -1,0 +1,33 @@
+-- Suggested testing environment:
+-- http://sqlite.online/
+
+-- Example case create statement:
+CREATE TABLE customers (
+  id INTEGER PRIMARY KEY NOT NULL,
+  name VARCHAR(50),
+  balance DECIMAL(10,2));
+
+CREATE TABLE orders (
+  id INTEGER PRIMARY KEY NOT NULL,
+  customerId INTEGER NOT NULL REFERENCES customers(id),
+  product VARCHAR(100));
+
+INSERT INTO customers(id, name, balance) VALUES(1, 'ACME', 500);
+INSERT INTO orders(id, customerId, product) VALUES(1, 1, 'Diamond blade');
+
+INSERT INTO customers(id, name, balance) VALUES(2, 'Doolittle Co.', -100);
+INSERT INTO orders(id, customerId, product) VALUES(2, 2, 'Vacuum cleaner');
+
+-- Insert answer here
+
+SELECT * FROM orders;
+
+-- Expected output (in any order):
+-- id    customerId    product
+-- ---------------------------------
+-- 1     1             Diamond blade
+
+-- Explanation:
+-- In this example.
+-- A diamond blade was ordered by ACME. As ACME has a positive balance, this order shouldn't be deleted.
+-- A vacuum cleaner was ordered by Doolittle Co. As Doolittle Co. has a negative balance, the order should be deleted.
